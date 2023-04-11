@@ -1,12 +1,17 @@
 package com.observerexample;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 // Affiche un résumé en console des informations (position) du GPS.
-public class AfficheResume implements Observateur {
+public class AfficheResume implements PropertyChangeListener {
         // Méthode appelée automatiquement lors d'un changement d'état du GPS.
-        public void actualiser(Observable o) {
-                if (o instanceof Gps) {
-                        Gps g = (Gps) o;
-                        System.out.println("Position : " + g.getPosition());
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+                Object obj = evt.getNewValue();
+                if (obj instanceof Gps) {
+                        Gps gps = (Gps) obj;
+                        System.out.println("Position : " + gps.getPosition());
                 }
         }
 }
